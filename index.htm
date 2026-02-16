@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>るみプロ | Rumi Production Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ffb7ce;
+            --primary-blue: #b2e2f2;
+            --sparkle-gold: #fff5a5;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #f0f7ff 100%);
+            color: #5a4a5a;
+            overflow-x: hidden;
+        }
+
+        .sparkle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 183, 206, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(178, 226, 242, 0.2) 0%, transparent 20%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(255, 183, 206, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 183, 206, 0.2);
+        }
+
+        .text-gradient {
+            background: linear-gradient(45deg, #ff80ab, #82b1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-shiny {
+            background: linear-gradient(45deg, #ffb7ce, #b2e2f2);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shiny::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .schedule-tag {
+            background: rgba(255, 183, 206, 0.15);
+            border-left: 4px solid var(--primary-pink);
+        }
+
+        .star-decoration {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Mobile Menu styles */
+        #mobile-menu-overlay {
+            clip-path: circle(0% at 90% 5%);
+            transition: clip-path 0.5s ease-in-out;
+        }
+
+        #mobile-menu-overlay.active {
+            clip-path: circle(150% at 90% 5%);
+        }
+
+        .nav-link-mobile {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 1rem;
+            display: block;
+            text-align: center;
+            color: #5a4a5a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sparkle-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="text-2xl font-bold text-gradient">るみプロ</div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8 font-bold text-sm">
+            <a href="#concept" class="hover:text-pink-400 transition">Concept</a>
+            <a href="#members" class="hover:text-pink-400 transition">Members</a>
+            <a href="#schedule" class="hover:text-pink-400 transition">Schedule</a>
+            <a href="#management" class="hover:text-pink-400 transition">Management</a>
+        </div>
+
+        <!-- Hamburger Button -->
+        <button id="menu-toggle" class="md:hidden text-pink-400 focus:outline-none z-[110]" aria-label="メニューを開く">
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hidden transition-transform"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay"
+        class="fixed inset-0 bg-white/95 z-[105] flex flex-col items-center justify-center space-y-8 md:hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none"
+            style="background-image: radial-gradient(circle at 50% 50%, var(--primary-pink) 0%, transparent 50%);">
+        </div>
+        <a href="#concept" class="nav-link-mobile hover:text-pink-400">Concept</a>
+        <a href="#members" class="nav-link-mobile hover:text-pink-400">Members</a>
+        <a href="#schedule" class="nav-link-mobile hover:text-pink-400">Schedule</a>
+        <a href="#management" class="nav-link-mobile hover:text-pink-400">Management</a>
+
+        <div class="pt-10 flex space-x-6">
+            <!-- Social Placeholder Icons for Mobile Menu -->
+            <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-400">X</div>
+            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-400">YT</div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-6 inline-block star-decoration">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#fff5a5">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                </svg>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 text-gradient italic">Rumi Production</h1>
+            <p class="text-lg md:text-2xl opacity-80 leading-relaxed px-4">
+                輝く星々が、あなたの日常をルミナスに彩る。<br class="hidden md:block">
+                次世代VTuberプロジェクト「るみプロ」へようこそ！
+            </p>
+        </div>
+    </header>
+
+    <!-- Concept -->
+    <section id="concept" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-8 md:p-10 text-center">
+                <h2 class="text-3xl font-bold mb-8 flex items-center justify-center">
+                    <span class="mr-2">✨</span> Concept <span class="ml-2">✨</span>
+                </h2>
+                <p class="text-base md:text-lg leading-loose">
+                    「るみプロ」は、個々の「輝き（Luminous）」を大切にするVTuber事務所です。<br class="hidden md:block">
+                    配信を通じて、リスナーの皆さまと共に新しい物語を紡ぎ、<br class="hidden md:block">
+                    世界中にキラキラとした笑顔を届けることを使命としています。<br class="hidden md:block">
+                    まだ小さな光かもしれませんが、いつか銀河一の輝きを目指して。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Today's Schedule -->
+    <section id="schedule" class="py-20 px-6 bg-white/30">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center text-gradient">Today's Schedule</h2>
+            <div class="grid gap-6 md:gap-4">
+                <!-- Member 1 Today -->
+                <div class="glass-card p-5 flex items-center flex-wrap md:flex-nowrap">
+                    <div
+                        class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-pink-200 mr-4 flex-shrink-0 flex items-center justify-center font-bold text-white text-xl shadow-sm">
+                        🌸</div>
+                    <div class="flex-grow min-w-[150px]">
+                        <div class="font-bold text-lg">ルミ・ステラ</div>
+                        <div class="text-pink-400 font-bold text-sm md:text-base">20:00 〜</div>
+                    </div>
+                    <div
+                        class="schedule-tag w-full md:w-auto px-4 md:px-6 py-2 rounded-xl mt-3 md:mt-0 italic font-bold text-sm md:text-base">
+                        【歌枠】きらきらアニソンメドレー！
+                    </div>
+                    <a href="#"
+                        class="w-full md:w-auto text-center md:ml-auto btn-shiny px-6 py-2 rounded-full text-sm font-bold mt-4 md:mt-0">待機所へ</a>
+                </div>
+                <!-- Member 2 Today -->
+                <div class="glass-card p-5 flex items-center flex-wrap md:flex-nowrap">
+                    <div
+                        class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-blue-200 mr-4 flex-shrink-0 flex items-center justify-center font-bold text-white text-xl shadow-sm">
+                        🌌</div>
+                    <div class="flex-grow min-w-[150px]">
+                        <div class="font-bold text-lg">星海 かなた</div>
+                        <div class="text-blue-400 font-bold text-sm md:text-base">22:30 〜</div>
+                    </div>
+                    <div
+                        class="schedule-tag w-full md:w-auto px-4 md:px-6 py-2 rounded-xl mt-3 md:mt-0 italic font-bold text-sm md:text-base">
+                        【雑談】深夜のまったり星空観察会
+                    </div>
+                    <a href="#"
+                        class="w-full md:w-auto text-center md:ml-auto btn-shiny px-6 py-2 rounded-full text-sm font-bold mt-4 md:mt-0">待機所へ</a>
+                </div>
+                <!-- Member 3 Today -->
+                <div class="glass-card p-5 flex items-center flex-wrap md:flex-nowrap">
+                    <div
+                        class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-200 mr-4 flex-shrink-0 flex items-center justify-center font-bold text-white text-xl shadow-sm">
+                        🌙</div>
+                    <div class="flex-grow min-w-[150px]">
+                        <div class="font-bold text-lg">夢みるみる</div>
+                        <div class="text-purple-400 font-bold text-sm md:text-base">19:00 〜</div>
+                    </div>
+                    <div
+                        class="schedule-tag w-full md:w-auto px-4 md:px-6 py-2 rounded-xl mt-3 md:mt-0 italic font-bold text-sm md:text-base">
+                        【ゲーム】超難関アクションに挑戦！
+                    </div>
+                    <a href="#"
+                        class="w-full md:w-auto text-center md:ml-auto btn-shiny px-6 py-2 rounded-full text-sm font-bold mt-4 md:mt-0">待機所へ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center text-gradient">Members</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Member Placeholder 1 -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                    <div
+                        class="w-32 h-32 rounded-full bg-gradient-to-tr from-pink-200 to-pink-400 mb-6 shadow-md flex items-center justify-center text-4xl overflow-hidden border-4 border-white/50">
+                        🌸
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">ルミ・ステラ</h3>
+                    <p class="text-sm opacity-70 mb-4 tracking-widest">Lumi Stella</p>
+                    <p class="text-sm mb-6 leading-relaxed">
+                        流れ星から落ちてきた見習い魔法少女。歌うことと甘いものが大好き！みんなにハッピーを届けます！
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#"
+                            class="text-pink-400 hover:scale-125 transition transform p-2 bg-pink-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="text-red-400 hover:scale-125 transition transform p-2 bg-red-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Member Placeholder 2 -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                    <div
+                        class="w-32 h-32 rounded-full bg-gradient-to-tr from-blue-200 to-blue-400 mb-6 shadow-md flex items-center justify-center text-4xl overflow-hidden border-4 border-white/50">
+                        🌌
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">星海 かなた</h3>
+                    <p class="text-sm opacity-70 mb-4 tracking-widest">Hoshimi Kanata</p>
+                    <p class="text-sm mb-6 leading-relaxed">
+                        深海と宇宙の境界線に住む不思議な少女。クールに見えて実はかなりのゲームオタク。
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#"
+                            class="text-blue-400 hover:scale-125 transition transform p-2 bg-blue-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="text-red-400 hover:scale-125 transition transform p-2 bg-red-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Member Placeholder 3 -->
+                <div class="glass-card p-8 flex flex-col items-center text-center">
+                    <div
+                        class="w-32 h-32 rounded-full bg-gradient-to-tr from-purple-200 to-purple-400 mb-6 shadow-md flex items-center justify-center text-4xl overflow-hidden border-4 border-white/50">
+                        🌙
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">夢みるみる</h3>
+                    <p class="text-sm opacity-70 mb-4 tracking-widest">Yume Mirumiru</p>
+                    <p class="text-sm mb-6 leading-relaxed">
+                        夢の国から迷い込んだ羊の妖精。お昼寝が趣味だけど、配信が始まると元気いっぱい！
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#"
+                            class="text-purple-400 hover:scale-125 transition transform p-2 bg-purple-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="text-red-400 hover:scale-125 transition transform p-2 bg-red-50 rounded-full">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Schedule -->
+    <section class="py-20 px-6 bg-pink-50/50">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-10 text-gradient">Weekly Schedule</h2>
+            <div class="overflow-x-auto pb-4">
+                <table class="w-full min-w-[700px] glass-card overflow-hidden">
+                    <thead>
+                        <tr class="bg-pink-100/50">
+                            <th class="p-4 border-b">月</th>
+                            <th class="p-4 border-b">火</th>
+                            <th class="p-4 border-b">水</th>
+                            <th class="p-4 border-b">木</th>
+                            <th class="p-4 border-b text-pink-500">金</th>
+                            <th class="p-4 border-b text-blue-500">土</th>
+                            <th class="p-4 border-b text-red-500">日</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-6 border-b text-sm">20:00 ルミ</td>
+                            <td class="p-6 border-b text-sm">21:00 かなた</td>
+                            <td class="p-6 border-b text-sm">22:00 みるみる</td>
+                            <td class="p-6 border-b text-sm">オフ</td>
+                            <td class="p-6 border-b text-sm">19:00 全員集合</td>
+                            <td class="p-6 border-b text-sm">20:00 ルミ</td>
+                            <td class="p-6 border-b text-sm">21:00 かなた</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-sm opacity-60">※スケジュールは変更になる場合がございます。横スクロールで確認できます。</p>
+        </div>
+    </section>
+
+    <!-- Management Information -->
+    <footer id="management" class="pt-20 pb-10 px-6 bg-white border-t border-pink-100">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-pink-400">Rumi Production</h3>
+                <p class="text-sm leading-loose mb-8">
+                    るみプロは、ZenSky Project が運営主体となり、合同会社るみしすてむが制作・クリエイティブ面での協力を行うVTuber事務所です。<br>
+                    プロジェクト全体を通じて、ファンとクリエイターが共に歩める未来を創造します。
+                </p>
+                <div class="space-y-6">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Project
+                            Operator / Management</span>
+                        <a href="https://zenskypj.org" target="_blank"
+                            class="text-blue-400 hover:text-blue-500 font-bold text-xl transition inline-flex items-center">
+                            ZenSky Project
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Production
+                            Co-Operation</span>
+                        <a href="https://rumishistem.su" target="_blank"
+                            class="text-pink-400 hover:text-pink-500 font-bold text-xl transition inline-flex items-center">
+                            合同会社るみしすてむ
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:items-end">
+                <h3 class="text-xl font-bold mb-6 text-pink-400">Links</h3>
+                <ul class="space-y-4 text-left md:text-right">
+                    <li><a href="#" class="hover:text-pink-400 transition font-bold">プライバシーポリシー</a></li>
+                    <li><a href="#" class="hover:text-pink-400 transition font-bold">二次創作ガイドライン</a></li>
+                    <li><a href="#" class="hover:text-pink-400 transition font-bold">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center border-t border-gray-100 pt-10 px-4">
+            <p class="text-[10px] md:text-xs text-gray-400 tracking-widest uppercase">
+                &copy; Rumi Production All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
+        function toggleMenu() {
+            const isActive = mobileMenuOverlay.classList.toggle('active');
+            menuIcon.classList.toggle('hidden', isActive);
+            closeIcon.classList.toggle('hidden', !isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        // Close menu when link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenuOverlay.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add some "sparkle" dots randomly via JS for extra fluff
+        window.onload = function () {
+            const bg = document.querySelector('.sparkle-bg');
+            if (bg) {
+                for (let i = 0; i < 40; i++) {
+                    const dot = document.createElement('div');
+                    dot.style.position = 'absolute';
+                    dot.style.width = Math.random() * 4 + 2 + 'px';
+                    dot.style.height = dot.style.width;
+                    dot.style.background = '#fff5a5';
+                    dot.style.borderRadius = '50%';
+                    dot.style.top = Math.random() * 100 + '%';
+                    dot.style.left = Math.random() * 100 + '%';
+                    dot.style.opacity = Math.random();
+                    dot.style.boxShadow = '0 0 10px #fff';
+                    dot.classList.add('star-decoration');
+                    dot.style.animationDelay = Math.random() * 4 + 's';
+                    dot.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    bg.appendChild(dot);
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
