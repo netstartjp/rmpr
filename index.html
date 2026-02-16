@@ -132,17 +132,23 @@
         }
 
         /* Modal Styles */
-        #contact-modal {
+        #contact-modal,
+        #news-modal,
+        #news-archive-modal {
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        #contact-modal.hidden {
+        #contact-modal.hidden,
+        #news-modal.hidden,
+        #news-archive-modal.hidden {
             display: none;
             opacity: 0;
             visibility: hidden;
         }
 
-        #contact-modal.active {
+        #contact-modal.active,
+        #news-modal.active,
+        #news-archive-modal.active {
             display: flex;
             opacity: 1;
             visibility: visible;
@@ -175,10 +181,18 @@
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-8 font-bold text-sm">
+            <a href="#news" class="hover:text-pink-400 transition">News</a>
             <a href="#concept" class="hover:text-pink-400 transition">Concept</a>
             <a href="#members" class="hover:text-pink-400 transition">Members</a>
             <a href="#schedule" class="hover:text-pink-400 transition">Schedule</a>
             <a href="#management" class="hover:text-pink-400 transition">Management</a>
+            <a href="https://eth.rumiserver.com/@rumi_production" target="_blank"
+                class="text-pink-400 hover:scale-110 transition -mt-1" title="Official Misskey">
+                <svg class="w-6 h-6 fill-current text-pink-400" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                </svg>
+            </a>
         </div>
 
         <!-- Hamburger Button -->
@@ -200,15 +214,23 @@
         <div class="absolute inset-0 opacity-20 pointer-events-none"
             style="background-image: radial-gradient(circle at 50% 50%, var(--primary-pink) 0%, transparent 50%);">
         </div>
+        <a href="#news" class="nav-link-mobile hover:text-pink-400">News</a>
         <a href="#concept" class="nav-link-mobile hover:text-pink-400">Concept</a>
         <a href="#members" class="nav-link-mobile hover:text-pink-400">Members</a>
         <a href="#schedule" class="nav-link-mobile hover:text-pink-400">Schedule</a>
         <a href="#management" class="nav-link-mobile hover:text-pink-400">Management</a>
 
-        <div class="pt-10 flex space-x-6">
-            <!-- Social Placeholder Icons for Mobile Menu -->
-            <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-400">X</div>
-            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-400">YT</div>
+        <div class="pt-10 flex flex-col items-center space-y-6">
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Follow Us</p>
+            <div class="flex space-x-6">
+                <a href="https://eth.rumiserver.com/@rumi_production" target="_blank"
+                    class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-400">
+                    <svg class="w-6 h-6 fill-current text-pink-400" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -245,6 +267,49 @@
             </div>
         </div>
     </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center text-gradient">News</h2>
+            <div id="news-list" class="space-y-4 mb-8">
+                <!-- News items will be injected here -->
+                <div class="glass-card p-6 animate-pulse">
+                    <div class="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+                    <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+                </div>
+            </div>
+            <div class="text-center space-y-4">
+                <button id="view-more-news"
+                    class="btn-shiny px-8 py-3 rounded-full text-sm font-bold shadow-lg shadow-pink-100 hover:scale-105 transition">
+                    もっとみる！
+                </button>
+                <div class="pt-12">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-6">Join Our Community
+                    </p>
+                    <a href="https://eth.rumiserver.com/@rumi_production" target="_blank"
+                        class="inline-flex items-center space-x-6 bg-white/40 backdrop-blur-md hover:bg-white/70 border border-pink-100 p-6 md:p-8 rounded-[32px] transition-all hover:scale-[1.02] hover:shadow-xl group w-full max-w-2xl">
+                        <div
+                            class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-tr from-pink-100 to-pink-200 flex items-center justify-center text-pink-500 group-hover:rotate-12 transition-transform duration-500 shadow-inner">
+                            <svg class="w-10 h-10 md:w-12 md:h-12 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <div
+                                class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">
+                                Misskey Official Account</div>
+                            <div class="text-lg md:text-2xl font-bold text-gradient">@rumi_production<span
+                                    class="text-sm opacity-60 ml-1 font-normal">@eth.rumiserver.com</span></div>
+                            <p class="text-xs md:text-sm text-gray-500 mt-2 font-medium">最新情報や限定コンテンツをチェックしてね！✨</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Today's Schedule
     <section id="schedule" class="py-20 px-6 bg-white/30">
@@ -484,8 +549,6 @@
             <div class="flex flex-col md:items-end">
                 <h3 class="text-xl font-bold mb-6 text-pink-400">Links</h3>
                 <ul class="space-y-4 text-left md:text-right">
-                    <li><a href="#" class="hover:text-pink-400 transition font-bold">プライバシーポリシー</a></li>
-                    <li><a href="#" class="hover:text-pink-400 transition font-bold">二次創作ガイドライン</a></li>
                     <li><a href="#" id="contact-link" class="hover:text-pink-400 transition font-bold">お問い合わせ</a></li>
                 </ul>
             </div>
@@ -547,6 +610,44 @@
         </div>
     </div>
 
+    <!-- News Archive Modal -->
+    <div id="news-archive-modal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[150] hidden items-center justify-center p-6">
+        <div class="glass-card p-8 md:p-10 max-w-4xl w-full relative max-h-[90vh] overflow-y-auto">
+            <button id="close-archive-modal"
+                class="absolute top-4 right-4 text-gray-400 hover:text-pink-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-3xl font-bold mb-10 text-center text-gradient">News Archive</h2>
+            <div id="archive-list" class="space-y-4">
+                <!-- All news items will be injected here -->
+            </div>
+            <button id="close-archive-modal-btn"
+                class="w-full mt-10 btn-shiny py-3 rounded-full font-bold shadow-lg shadow-pink-200">閉じる</button>
+        </div>
+    </div>
+
+    <!-- News Detail Modal -->
+    <div id="news-modal"
+        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] hidden items-center justify-center p-6">
+        <div class="glass-card p-8 md:p-10 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto">
+            <button id="close-news-modal" class="absolute top-4 right-4 text-gray-400 hover:text-pink-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="news-modal-content">
+                <!-- News detail will be injected here -->
+            </div>
+            <button id="close-news-modal-btn"
+                class="w-full mt-10 btn-shiny py-3 rounded-full font-bold shadow-lg shadow-pink-200">閉じる</button>
+        </div>
+    </div>
+
     <script>
         // Hamburger Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
@@ -590,7 +691,148 @@
         });
 
         // Add some "sparkle" dots randomly via JS for extra fluff
+        // News Logic
+        const newsList = document.getElementById('news-list');
+        const archiveList = document.getElementById('archive-list');
+        const newsModal = document.getElementById('news-modal');
+        const archiveModal = document.getElementById('news-archive-modal');
+        const viewMoreBtn = document.getElementById('view-more-news');
+        const newsModalContent = document.getElementById('news-modal-content');
+
+        const closeNewsModal = document.getElementById('close-news-modal');
+        const closeNewsModalBtn = document.getElementById('close-news-modal-btn');
+        const closeArchiveModal = document.getElementById('close-archive-modal');
+        const closeArchiveModalBtn = document.getElementById('close-archive-modal-btn');
+
+        let allNewsData = [];
+
+        async function fetchNews() {
+            try {
+                const response = await fetch('news.json');
+                allNewsData = await response.json();
+
+                // Sort by date descending
+                allNewsData.sort((a, b) => {
+                    const dateA = new Date(a.date.replace(/\//g, '-'));
+                    const dateB = new Date(b.date.replace(/\//g, '-'));
+                    if (dateB - dateA !== 0) return dateB - dateA;
+                    return b.id.localeCompare(a.id); // Tie breaker
+                });
+
+                renderNews(allNewsData.slice(0, 5));
+                checkURLParams(allNewsData);
+            } catch (error) {
+                console.error('Error fetching news:', error);
+                newsList.innerHTML = '<p class="text-center text-red-400 font-bold">お知らせの取得に失敗しました。</p>';
+            }
+        }
+
+        function renderNews(news, target = newsList) {
+            target.innerHTML = '';
+            news.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 cursor-pointer hover:bg-white/80 transition-all';
+                card.innerHTML = `
+                    <div class="flex items-center space-x-4 mb-2 text-sm">
+                        <span class="text-pink-400 font-bold">${item.date}</span>
+                        ${item.category ? `<span class="bg-pink-100 text-pink-500 px-2 py-0.5 rounded-full text-[10px]">${item.category}</span>` : ''}
+                    </div>
+                    <h3 class="text-lg font-bold">${item.title}</h3>
+                `;
+                card.onclick = () => showNewsDetail(item);
+                target.appendChild(card);
+            });
+        }
+
+        function showNewsDetail(item) {
+            newsModalContent.innerHTML = `
+                <div class="mb-4">
+                    <span class="text-pink-400 font-bold">${item.date}</span>
+                </div>
+                <h2 class="text-2xl font-bold mb-6 text-gradient">${item.title}</h2>
+                <div class="text-gray-600 leading-loose whitespace-pre-wrap">${item.content.replace(/\\n/g, '<br>')}</div>
+                ${item.link ? `<div class="mt-8"><a href="${item.link}" target="_blank" class="text-pink-400 font-bold hover:underline">関連リンクはこちら</a></div>` : ''}
+            `;
+            openNewsModal();
+            // Update URL without reloading
+            const url = new URL(window.location);
+            url.searchParams.set('news', item.id);
+            window.history.pushState({}, '', url);
+        }
+
+        function openNewsModal() {
+            newsModal.classList.remove('hidden');
+            setTimeout(() => newsModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeNewsDetailModal() {
+            newsModal.classList.remove('active');
+            setTimeout(() => {
+                newsModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+            // Remove news param from URL if present
+            const url = new URL(window.location);
+            url.searchParams.delete('news');
+            window.history.pushState({}, '', url);
+        }
+
+        function openArchiveModal() {
+            renderNews(allNewsData, archiveList);
+            archiveModal.classList.remove('hidden');
+            setTimeout(() => archiveModal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArchiveModalFunc() {
+            archiveModal.classList.remove('active');
+            setTimeout(() => {
+                archiveModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        viewMoreBtn.addEventListener('click', openArchiveModal);
+
+        [closeNewsModal, closeNewsModalBtn].forEach(btn => {
+            btn.addEventListener('click', closeNewsDetailModal);
+        });
+
+        [closeArchiveModal, closeArchiveModalBtn].forEach(btn => {
+            btn.addEventListener('click', closeArchiveModalFunc);
+        });
+
+        newsModal.addEventListener('click', (e) => {
+            if (e.target === newsModal) closeNewsDetailModal();
+        });
+
+        archiveModal.addEventListener('click', (e) => {
+            if (e.target === archiveModal) closeArchiveModalFunc();
+        });
+
+        function checkURLParams(newsData) {
+            const params = new URLSearchParams(window.location.search);
+            const newsId = params.get('news');
+            if (newsId) {
+                const item = newsData.find(n => n.id === newsId);
+                if (item) {
+                    showNewsDetail(item);
+                }
+            }
+        }
+
+        [closeNewsModal, closeNewsModalBtn].forEach(btn => {
+            btn.addEventListener('click', closeNewsDetailModal);
+        });
+
+        newsModal.addEventListener('click', (e) => {
+            if (e.target === newsModal) closeNewsDetailModal();
+        });
+
         window.onload = function () {
+            fetchNews();
+            // Existing sparkle logic...
             const bg = document.querySelector('.sparkle-bg');
             if (bg) {
                 for (let i = 0; i < 40; i++) {
